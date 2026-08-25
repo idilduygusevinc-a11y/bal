@@ -496,165 +496,283 @@ function startJourney() {
 
 }
 
-</script>
+<style>
+    </script>
+/* =========================
+   GİZLİ YILDIZLAR
+   ========================= */
 
-
-  <style>
-  .secret-star {
+.secret-star {
     position: fixed;
-    z-index: 99999;
+    z-index: 9999;
+
     color: white;
-    font-size: 22px;
+    font-size: 24px;
+
     cursor: pointer;
     user-select: none;
-    text-shadow: 0 0 8px white;
-    animation: starTwinkle 1.8s infinite alternate;
-  }
 
-  @keyframes starTwinkle {
-    from {
-      opacity: 0.35;
-      transform: scale(0.8);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1.15);
-    }
-  }
+    text-shadow:
+        0 0 8px white,
+        0 0 18px rgba(255,255,255,0.8);
 
-  .secret-message {
+    transition: 0.3s;
+}
+
+.secret-star:hover {
+    transform: scale(1.3);
+}
+
+.secret-star.found {
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+
+/* =========================
+   GİZLİ MESAJ
+   ========================= */
+
+#secretMessage {
     position: fixed;
+
     left: 50%;
     top: 50%;
+
     transform: translate(-50%, -50%);
-    z-index: 100000;
+
+    z-index: 10000;
+
     display: none;
+
     padding: 18px 25px;
+
     max-width: 80%;
+
     border-radius: 15px;
-    background: rgba(0, 0, 0, 0.9);
+
+    background: rgba(0,0,0,0.9);
+
     color: white;
+
     text-align: center;
+
     font-size: 18px;
-  }
+}
 
-  .secret-cat {
+
+/* =========================
+   SAVANNAH KEDİSİ
+   ========================= */
+
+.secret-cat {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 80px;
-    z-index: 99999;
-    cursor: pointer;
-    display: none;
-  }
 
-  .secret-cat:hover {
+    right: 25px;
+    bottom: 25px;
+
+    width: 90px;
+
+    z-index: 9999;
+
+    cursor: pointer;
+
+    display: none;
+
+    transition: 0.3s;
+}
+
+.secret-cat:hover {
     transform: scale(1.08);
-  }
+}
 </style>
 
-<div id="secretMessage" class="secret-message"></div>
 
-<!-- YILDIZLAR -->
-<div class="secret-star" style="left:12%; top:18%;"
-  onclick="showStarMessage('Küçük bir sır buldun. ✨')" div>
-    
-    <div class="secret-star" style="left:78%; top:20%;"
- onclick="showStarMessage('Bir tane daha var... 🌙')">✦</div>
+<!-- =========================
+     GİZLİ MESAJ KUTUSU
+     ========================= -->
 
-<div class="secret-star" style="left:35%; top:65%;"
-   onclick="showStarMessage('Beni bulmaya biraz daha yaklaş.')">✦</div>
+<div id="secretMessage"></div>
 
-<div class="secret-star" style="left:88%; top:70%;"
-    onclick="showStarMessage('Sonunda beni bulacaksın. ✨')">✦</div>
 
-<!-- SAVANNAH KEDİSİ -->
+<!-- =========================
+     4 GİZLİ YILDIZ
+     ========================= -->
+
+<div
+    class="secret-star"
+    style="left:12%; top:18%;"
+    onclick="findStar(this, 'Küçük bir sır buldun. ✨')">
+    ✦
+</div>
+
+<div
+    class="secret-star"
+    style="left:78%; top:25%;"
+    onclick="findStar(this, 'Bir tane daha var... 🌙')">
+    ✦
+</div>
+
+<div
+    class="secret-star"
+    style="left:35%; top:72%;"
+    onclick="findStar(this, 'Beni bulmaya biraz daha yaklaş.')">
+    ✦
+</div>
+
+<div
+    class="secret-star"
+    style="left:88%; top:78%;"
+    onclick="findStar(this, 'Sonunda beni buldun. ✨')">
+    ✦
+</div>
+
+
+<!-- =========================
+     SAVANNAH KEDİSİ
+     ========================= -->
+
 <img
-  class="secret-cat"
-  src="BURAYA-KEDI-GORSEL-ADINI-YAZ"
-  alt="Gizli Savannah kedisi"
-  onclick="catClicked()"
+    class="secret-cat"
+    id="secretCat"
+    src="BURAYA-KEDI-DOSYA-ADINI-YAZ"
+    alt="Savannah kedisi"
+    onclick="catClicked()"
 >
 
-<script>
-function showStarMessage(message) {
-    const box = document.getElementById("secretMessage");
 
-    if (!box) return;
+<script>
+
+/* =========================
+   YILDIZ SİSTEMİ
+   ========================= */
+
+let foundStars = 0;
+
+function findStar(star, message) {
+
+    showMessage(message);
+
+    if (star.classList.contains("found")) {
+        return;
+    }
+
+    star.classList.add("found");
+
+    foundStars++;
+
+    if (foundStars === 4) {
+
+        setTimeout(function() {
+
+            const cat =
+                document.getElementById("secretCat");
+
+            if (cat) {
+                cat.style.display = "block";
+            }
+
+            showMessage("Beni buldun. 🐈✨");
+
+        }, 700);
+    }
+}
+
+
+/* =========================
+   MESAJ SİSTEMİ
+   ========================= */
+
+function showMessage(message) {
+
+    const box =
+        document.getElementById("secretMessage");
+
+    if (!box) {
+        return;
+    }
 
     box.textContent = message;
+
     box.style.display = "block";
 
     setTimeout(function() {
+
         box.style.display = "none";
+
     }, 2500);
 }
 
-  let catClicks = 0;
 
-  function catClicked() {
+/* =========================
+   KEDİ MESAJLARI
+   ========================= */
+
+let catClicks = 0;
+
+function catClicked() {
+
     catClicks++;
 
     if (catClicks === 1) {
-      showSecret("Seni seviyorum. ❤️");
+
+        showMessage("Seni seviyorum. ❤️");
+
     } else if (catClicks === 2) {
-      showSecret("Seni çok özledim. 🌙");
+
+        showMessage("Seni çok özledim. 🌙");
+
     } else if (catClicks === 3) {
-      showSecret("Her şeyimsin. ❤️");
+
+        showMessage("Her şeyimsin. ❤️");
+
     } else {
-      showSecret("Gözlerinde kayboluyorum. ✨");
+
+        showMessage("Gözlerinde kayboluyorum. ✨");
+
     }
-  }
+}
 
-  /* DEVAM ET'e basıldığında gizli şeyleri kaldır */
-  function hideSecretThings() {
-    document.querySelectorAll(".secret-star").forEach(function(star) {
-      star.style.display = "none";
-    });
 
-    const cat = document.querySelector(".secret-cat");
+/* =========================
+   DEVAM ET
+   ========================= */
+
+function hideSecretThings() {
+
+    document
+        .querySelectorAll(".secret-star")
+        .forEach(function(star) {
+
+            star.style.display = "none";
+
+        });
+
+
+    const cat =
+        document.getElementById("secretCat");
+
     if (cat) {
-      cat.style.display = "none";
+
+        cat.style.display = "none";
+
     }
 
-    const message = document.getElementById("secretMessage");
+
+    const message =
+        document.getElementById("secretMessage");
+
     if (message) {
-      message.style.display = "none";
+
+        message.style.display = "none";
+
     }
-  }
-</script>
+}
 
-<div id="secretMessage" class="secret-message"></div>
 
-<div class="secret-star" style="left:12%;top:18%;" onclick="showStarMessage('Küçük bir sır buldun. ✨')">✦</div>
-<div class="secret-star" style="left:78%;top:25%;" onclick="showStarMessage('Bir tane daha var... 🌙')">✦</div>
-<div class="secret-star" style="left:35%;top:72%;" onclick="showStarMessage('Beni bulmaya biraz daha yaklaş.')">✦</div>
-<div class="secret-star" style="left:88%;top:78%;" onclick="showStarMessage('Sonunda beni bulacaksın. ✨')">✦</div>
 
-<img
-  class="secret-cat"
-  src="BURAYA-KEDI-GORSEL-ADINI-YAZ"
-  alt="Gizli kedi"
-  onclick="catClicked()"
->
 
-<script>
-  let catClicks = 0;
-
-  function catClicked() {
-    catClicks++;
-
-    if (catClicks === 1) {
-      showSecret("Seni seviyorum. ❤️");
-    } else if (catClicks === 2) {
-      showSecret("Seni çok özledim. 🌙");
-    } else if (catClicks === 3) {
-      showSecret("Her şeyimsin. ❤️");
-    } else {
-      showSecret("Gözlerinde kayboluyorum. ✨");
-    }
-  }
-
+  
  
 
 </script>
