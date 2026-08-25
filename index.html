@@ -502,6 +502,85 @@ function startJourney() {
 
 </script>
 
+<style>
+  .secret-star {
+    position: fixed;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 9999;
+    user-select: none;
+    animation: twinkle 2s infinite alternate;
+  }
 
+  .secret-star:hover {
+    transform: scale(1.4);
+  }
+
+  @keyframes twinkle {
+    from { opacity: 0.35; }
+    to { opacity: 1; }
+  }
+
+  .secret-message {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.9);
+    color: white;
+    padding: 18px 24px;
+    border-radius: 15px;
+    font-size: 18px;
+    text-align: center;
+    z-index: 10000;
+    display: none;
+  }
+
+  .secret-cat {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 75px;
+    cursor: pointer;
+    z-index: 9999;
+    transition: transform 0.2s;
+  }
+
+  .secret-cat:hover {
+    transform: scale(1.08);
+  }
+</style>
+
+<div id="secretMessage" class="secret-message"></div>
+
+<div class="secret-star" style="left:12%;top:18%;" onclick="showSecret('Küçük bir sır buldun. ✨')">✦</div>
+<div class="secret-star" style="left:78%;top:25%;" onclick="showSecret('Bir tane daha var... 🌙')">✦</div>
+<div class="secret-star" style="left:35%;top:72%;" onclick="showSecret('Beni bulmaya biraz daha yaklaş.')">✦</div>
+<div class="secret-star" style="left:88%;top:78%;" onclick="showSecret('Sonunda beni bulacaksın. ✨')">✦</div>
+
+<img
+  class="secret-cat"
+  src="BURAYA-KEDI-GORSEL-ADINI-YAZ"
+  alt="Gizli kedi"
+  onclick="catClicked()"
+>
+
+<script>
+  let catClicks = 0;
+
+  function catClicked() {
+    catClicks++;
+
+    if (catClicks === 1) {
+      showSecret("Seni seviyorum. ❤️");
+    } else if (catClicks === 2) {
+      showSecret("Seni çok özledim. 🌙");
+    } else if (catClicks === 3) {
+      showSecret("Her şeyimsin. ❤️");
+    } else {
+      showSecret("Gözlerinde kayboluyorum. ✨");
+    }
+  }
+</script>
 </body>
 </html>
