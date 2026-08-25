@@ -328,7 +328,8 @@ h1 {
 
     <button
         class="button"
-        onclick="startJourney()">
+        onclick="hideSecretThings(); startJourney()"
+
 
         DEVAM ET
 
@@ -502,23 +503,28 @@ function startJourney() {
 
 </script>
 
-<style>
+
+  <style>
   .secret-star {
     position: fixed;
-    font-size: 18px;
+    z-index: 99999;
+    color: white;
+    font-size: 22px;
     cursor: pointer;
-    z-index: 9999;
     user-select: none;
-    animation: twinkle 2s infinite alternate;
+    text-shadow: 0 0 8px white;
+    animation: starTwinkle 1.8s infinite alternate;
   }
 
-  .secret-star:hover {
-    transform: scale(1.4);
-  }
-
-  @keyframes twinkle {
-    from { opacity: 0.35; }
-    to { opacity: 1; }
+  @keyframes starTwinkle {
+    from {
+      opacity: 0.35;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1.15);
+    }
   }
 
   .secret-message {
@@ -526,30 +532,102 @@ function startJourney() {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0,0,0,0.9);
-    color: white;
-    padding: 18px 24px;
-    border-radius: 15px;
-    font-size: 18px;
-    text-align: center;
-    z-index: 10000;
+    z-index: 100000;
     display: none;
+    padding: 18px 25px;
+    max-width: 80%;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    text-align: center;
+    font-size: 18px;
   }
 
   .secret-cat {
     position: fixed;
-    right: 18px;
-    bottom: 18px;
-    width: 75px;
+    right: 20px;
+    bottom: 20px;
+    width: 80px;
+    z-index: 99999;
     cursor: pointer;
-    z-index: 9999;
-    transition: transform 0.2s;
+    display: block;
   }
 
   .secret-cat:hover {
     transform: scale(1.08);
   }
 </style>
+
+<div id="secretMessage" class="secret-message"></div>
+
+<!-- YILDIZLAR -->
+<div class="secret-star" style="left:12%; top:18%;"
+     onclick="showStarMessage('Küçük bir ışık buldun. ✨')">✦</div>
+
+<div class="secret-star" style="left:78%; top:20%;"
+     onclick="showStarMessage('Bir tane daha var... 🌙')">✦</div>
+
+<div class="secret-star" style="left:35%; top:65%;"
+     onclick="showStarMessage('Beni bulmaya biraz daha yaklaş.')">✦</div>
+
+<div class="secret-star" style="left:88%; top:70%;"
+     onclick="showStarMessage('Sonunda beni bulacaksın. ✨')">✦</div>
+
+<!-- SAVANNAH KEDİSİ -->
+<img
+  class="secret-cat"
+  src="BURAYA-KEDI-GORSEL-ADINI-YAZ"
+  alt="Gizli Savannah kedisi"
+  onclick="catClicked()"
+>
+
+<script>
+function showStarMessage(message) {
+    const box = document.getElementById("secretMessage");
+
+    if (!box) return;
+
+    box.textContent = message;
+    box.style.display = "block";
+
+    setTimeout(function() {
+        box.style.display = "none";
+    }, 2500);
+}
+
+  let catClicks = 0;
+
+  function catClicked() {
+    catClicks++;
+
+    if (catClicks === 1) {
+      showSecret("Seni seviyorum. ❤️");
+    } else if (catClicks === 2) {
+      showSecret("Seni çok özledim. 🌙");
+    } else if (catClicks === 3) {
+      showSecret("Her şeyimsin. ❤️");
+    } else {
+      showSecret("Gözlerinde kayboluyorum. ✨");
+    }
+  }
+
+  /* DEVAM ET'e basıldığında gizli şeyleri kaldır */
+  function hideSecretThings() {
+    document.querySelectorAll(".secret-star").forEach(function(star) {
+      star.style.display = "none";
+    });
+
+    const cat = document.querySelector(".secret-cat");
+    if (cat) {
+      cat.style.display = "none";
+    }
+
+    const message = document.getElementById("secretMessage");
+    if (message) {
+      message.style.display = "none";
+    }
+  }
+</script>
 
 <div id="secretMessage" class="secret-message"></div>
 
