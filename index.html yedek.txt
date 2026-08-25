@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Sana Özel</title>
+
+</head>
+
+<body>
+
+    <h1>Buraya hoş geldin.</h1>
+
+    <p>Bu küçük dünya senin için hazırlandı.</p>
+
+</body>
+
+</html>
+
+body {
+
+    background-image: url("dogum-gokyuzu.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;}

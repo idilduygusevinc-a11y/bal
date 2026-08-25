@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>7 Ocak 2011</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    color: white;
+    font-family: Georgia, "Times New Roman", serif;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 25, 0.25),
+            rgba(0, 0, 25, 0.55)
+        ),
+        url("dogum-gokyuzu.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* ANA SAHNE */
+
+.content {
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+.date {
+    font-size: 15px;
+    letter-spacing: 6px;
+
+    opacity: 0;
+
+    animation:
+        appear 2s ease forwards;
+}
+
+h1 {
+    margin-top: 20px;
+
+    font-size: clamp(45px, 8vw, 90px);
+    font-weight: normal;
+
+    letter-spacing: 6px;
+
+    opacity: 0;
+
+    animation:
+        appear 2.5s ease 1s forwards;
+}
+
+.place {
+    margin-top: 18px;
+
+    font-size: 17px;
+    letter-spacing: 4px;
+
+    opacity: 0;
+
+    animation:
+        appear 2.5s ease 2s forwards;
+}
+
+.message {
+    margin-top: 45px;
+
+    max-width: 650px;
+
+    font-size: 19px;
+    line-height: 1.9;
+
+    opacity: 0;
+
+    animation:
+        appear 3s ease 3s forwards;
+}
+
+
+/* DEVAM ET */
+
+.button {
+    margin-top: 45px;
+
+    padding: 15px 40px;
+
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 50px;
+
+    background: rgba(255,255,255,0.08);
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: 4px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+
+    opacity: 0;
+
+    animation:
+        appear 3s ease 4s forwards;
+
+    transition: 0.4s;
+}
+
+.button:hover {
+    transform: scale(1.08);
+
+    background:
+        rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 0 25px rgba(200,220,255,0.8),
+        0 0 70px rgba(150,180,255,0.4);
+}
+
+
+/* ÇİÇEK SAHNESİ */
+
+#realFlowerScene {
+    position: fixed;
+    inset: 0;
+
+    z-index: 30;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    background: black;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 2s ease;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding:
+        60px 20px 100px;
+}
+
+#realFlowerScene.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* ÇİÇEK */
+
+#realFlower {
+    width: min(70vw, 380px);
+
+    aspect-ratio: 1 / 1;
+
+    background-image:
+        url("orimcek-zambagi.jpeg");
+
+    background-size: 300% 300%;
+
+    background-repeat: no-repeat;
+
+    background-position:
+        0% 0%;
+
+    transform:
+        scale(0.65);
+
+    transition:
+        transform 1.5s ease;
+
+    flex-shrink: 0;
+}
+
+#realFlowerScene.show #realFlower {
+    transform:
+        scale(1);
+}
+
+
+/* MEKTUP */
+
+#flowerMessage {
+    max-width: 700px;
+
+    margin-top: 35px;
+
+    padding:
+        20px 30px;
+
+    text-align: center;
+
+    color: white;
+
+    font-size:
+        clamp(18px, 3vw, 30px);
+
+    line-height: 1.7;
+
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity 2.5s ease,
+        transform 2.5s ease;
+}
+
+#realFlowerScene.message-show #flowerMessage {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* ANİMASYONLAR */
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* TELEFON */
+
+@media (max-width: 600px) {
+
+    #realFlowerScene {
+        padding:
+            35px 15px 80px;
+    }
+
+    #realFlower {
+        width: min(82vw, 330px);
+    }
+
+    #flowerMessage {
+        padding:
+            15px 10px;
+
+        font-size: 19px;
+
+        line-height: 1.7;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- İLK SAHNE -->
+
+<div class="content">
+
+    <div class="date">
+        7 Ocak 2011 · 09:00
+    </div>
+
+    <h1>
+        Bir sabah...
+    </h1>
+
+    <div class="place">
+         Özbekistan
+    </div>
+
+    <p class="message">
+        Dünyanın bir yerinde,
+       her şeyiyle olanüstübiri doğdu.
+    </p>
+
+    <button
+        class="button"
+        onclick="startJourney()">
+
+        DEVAM ET
+
+    </button>
+
+</div>
+
+
+<!-- MÜZİK -->
+
+<audio
+    id="backgroundMusic"
+    loop
+    preload="auto">
+
+    <source src="muzik_yeni.mp3" type="audio/mpeg">
+
+</audio>
+
+    <source
+        src="muzik_yeni.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<!-- ÇİÇEK SAHNESİ -->
+
+<div id="realFlowerScene">
+
+    <div id="realFlower"></div>
+
+    <div id="flowerMessage">
+
+        Seni tanıdığımda sanki seni sevmek için varmışım,
+        <br>
+        sana ait, sana dair mişim gibi...
+        <br><br>
+
+        Ve o kadar güzel, o kadar mükemmelsin ki;
+        her halin, her bir zerren, her şeyin o kadar güzel ki...
+        <br><br>
+
+        Düşüncelerin, o sesin, her şeyin benim her şeyim oldu.
+        <br><br>
+
+        Ve özür dilerim gerizekalılık yaptığım için.
+        Daha düşünceli olmalıydım.
+        <br>
+
+        Gerçekten yanına yakışmak için çabalayacağım,
+        daha düşünerek hareket edeceğim.
+        <br><br>
+
+        Olanlar için özür dilerim
+        ve teşekkür ederim...
+        <br>
+
+        Hayatında olduğum için,
+        hayatım olduğun için, balım. ❤️
+
+    </div>
+
+</div>
+
+
+<script>
+
+function startJourney() {
+
+    /* MÜZİĞİ BAŞLAT */
+
+    const music =
+        document.getElementById(
+            "backgroundMusic"
+        );
+
+    music.volume = 0.35;
+
+    music.currentTime = 0;
+
+    music.play();
+    
+
+
+    /* ÇİÇEK SAHNESİ */
+
+    const flowerScene =
+        document.getElementById(
+            "realFlowerScene"
+        );
+
+    const flower =
+        document.getElementById(
+            "realFlower"
+        );
+
+
+    flowerScene.classList.add(
+        "show"
+    );
+
+
+    /* 3 × 3 KARELER */
+
+    const frames = [
+
+        "0% 0%",
+        "50% 0%",
+        "100% 0%",
+
+        "0% 50%",
+        "50% 50%",
+        "100% 50%",
+
+        "0% 100%",
+        "50% 100%",
+        "100% 100%"
+
+    ];
+
+
+    let frame = 0;
+
+
+    function nextFrame() {
+
+        flower.style.backgroundPosition =
+            frames[frame];
+
+
+        frame++;
+
+
+        if (
+            frame <
+            frames.length
+        ) {
+
+            setTimeout(
+                nextFrame,
+                500
+            );
+
+        } else {
+
+            setTimeout(
+                function() {
+
+                    flowerScene.classList.add(
+                        "message-show"
+                    );
+
+                },
+                1200
+            );
+
+        }
+
+    }
+
+
+    /* ÇİÇEK ANİMASYONUNU BAŞLAT */
+
+    setTimeout(
+        nextFrame,
+        1000
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
