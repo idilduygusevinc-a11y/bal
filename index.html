@@ -696,44 +696,59 @@ function showMessage(message) {
 
 let catClicks = 0;
 
-
 function catClicked() {
 
     catClicks++;
 
+    let message = "";
 
     if (catClicks === 1) {
-
-        showMessage(
-            "Seni seviyorum. ❤️"
-        );
-
+        message = "Seni seviyorum. ❤️";
     }
 
     else if (catClicks === 2) {
-
-        showMessage(
-            "Seni çok özledim. 🌙"
-        );
-
+        message = "Seni çok özledim. 🌙";
     }
 
     else if (catClicks === 3) {
-
-        showMessage(
-            "Her şeyimsin. ❤️"
-        );
-
+        message = "Her şeyimsin. ❤️";
     }
 
     else {
-
-        showMessage(
-            "Gözlerinde kayboluyorum. ✨"
-        );
-
+        message = "Gözlerinde kayboluyorum. ✨";
     }
 
+    const box =
+        document.getElementById("secretMessage");
+
+    const cat =
+        document.getElementById("secretCat");
+
+    if (!box || !cat) {
+        return;
+    }
+
+    box.textContent = message;
+
+    box.style.display = "block";
+
+    const catRect =
+        cat.getBoundingClientRect();
+
+    box.style.left =
+        (catRect.left - 15) + "px";
+
+    box.style.top =
+        (catRect.top + catRect.height / 2) + "px";
+
+    box.style.transform =
+        "translate(-100%, -50%)";
+
+    setTimeout(function() {
+
+        box.style.display = "none";
+
+    }, 2500);
 }
 
 
